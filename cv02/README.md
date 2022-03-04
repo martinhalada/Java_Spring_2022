@@ -56,6 +56,21 @@
 
 3. Describe G1 collector
 
+    - Garbage-First (G1) collector je serverový GC, cílený na multiprocesorové stroje s velkou pamětí.
+    - G1 se používá v aplikacích, které mohou pracovat souběžně s aplikačními vlákny; nepotřebují věttší haldu; potřebují předvídatelné GC pauzy
+    - flexibilní využití paměti
+    - G1 provádí souběžnou fázi globálního označování pro určení životnosti objektů v celé haldě. Po dokončení fáze označení, G1 ví, které oblasti jsou většinou prázdné. Proto GC probíhá nejprve v těchto oblastech, obvykle je zde velké množství volného prostoru. To je důvod, proč se tato metoda nazývá Garbage-First. 
+    - G1 není real-time collector
+    - Princip: halda je rozdělena na sadu stějně velkých oblastí (asi 2000, 1-32 MB), každý má souvislý rozsah virtuální paměti, určitým sadám oblastí jsou přiřazeny stejné role (eden, survivor space, old generation)
+    - Live objekty jsou zkopírovány/přesunuty do jedné nebo více oblastí, které přežily
+    - oblasti mohou měnit svoji velikost podle potřeby
+    - G1 vybere oblasti s nejnižší „živostí“ (ty oblasti, které lze shromáždit nejrychleji).
+
+    - Halda rodělena na mladou a starou generaci
+    - zaměřuje se mladou generaci, kde je to nejefektivnější, částěčně se zaměřuje i na starou generaci
+    - měkteré operace jsou vždy prováděny ve stop-the-world pauzách
+    - G1 sleduje chování aplikace a predikuje 
+
 ---
 
 4. Describe ZGC collector
