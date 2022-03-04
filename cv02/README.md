@@ -23,17 +23,22 @@
     - oproti zásobníku není threadsafe a je třeba ji chránit správnou synchronizací kódu
 
 
-    | **Parametr** | **Stack** | **Heap** |
-    |--------------|-----------|----------|
-    | Aplikace     |           |          |
-    | Pořadí       |           |          |
-    | Flexibilita  |           |          |
-    | Efektivita   |           |          |
-    |              |           |          |
-
 ---
 
 2. How does GC work
+
+    - GC hlídá všechny objekty v haldě (heap) a odstraňuje nevyužívané.
+    - GC vykonává 2 kroky = ,,Mark and Sweep´´
+            - Mark - GC detekuje která část paměti se používá a která ne
+            - Sweep - při tomto kroku se odstraní objekty nalezené v předchozím kroku
+    - Výhody GC
+            - Není potřeba se zabývat alokací a uvolňováním paměti
+            - Můžeme zvolit efektivní GC algoritmus dle chování aplikace
+            - Odstraňuje riziko vzniku tzv. memory leaků
+    - Nevýhody GC
+            - Bez kontroly nad alokací a uvolňováním paměti
+            - Stop the world události
+            - Zabírá část výpočetního výkonu
 
     1. Stop the world
   
