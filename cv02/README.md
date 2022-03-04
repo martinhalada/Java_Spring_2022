@@ -75,6 +75,12 @@
 
 4. Describe ZGC collector
 
+    - ZGC je navržen tak, aby zkrátil stop-the-world fázi na co nejkratší jak jde.
+    - Dosahuje toho tím, že doba těchto pauz se nezvyšuje s velikostí haldy.
+    - hodí se na serverové aplikace, kde jsou velké haldy běžné.
+    - využívá ,,barevných´´ (colored) 64 bitové reference
+    - https://www.baeldung.com/jvm-zgc-garbage-collector
+
 ---
 
 5. Compare G1 vs ZGC
