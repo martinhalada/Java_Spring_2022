@@ -6,11 +6,11 @@
 
 2. How does GC work
 
-  1. Stop the world
+    1. Stop the world
   
-  ---
+    ---
   
-  2. GC roots
+    2. GC roots
 
 ---
 
