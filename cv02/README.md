@@ -4,8 +4,8 @@
 
     - JVM rozděluje paměť na stack (zásobník) a heap (haldu)
     - Stack se v Javě používá pro statickou alokaci paměti, práci s vlákny.
-    - Stack obsahuje hodnoty primitivních datových typů, referencí na objekty
-    - přístup do této paměti je pomocí LIFO.
+    - Stack obsahuje hodnoty primitivních datových typů, referencí na objekty, lokální proměnné, pořadí vykonávání metody
+    - přístup do této paměti je pomocí LIFO, protože je přístup globální
     - jakmile se ukončí vykonávání metody, tak se ,,stack frame´´ vyprázdní
     - proměnné uvnitř zásovníku existují tak dlouho, dokud je spuštěna metoda, která je vytvořila
     - při zaplnění nastane výjimka java.lang.StackOverFlowError.
@@ -21,6 +21,15 @@
     - přístup k haldě je pomalejší než do zásobníku
     - oproti zásobníku není automaticky dealokována - je proto potřeba využít Garbage Collector
     - oproti zásobníku není threadsafe a je třeba ji chránit správnou synchronizací kódu
+
+
+    | **Parametr** | **Stack** | **Heap** |
+    |--------------|-----------|----------|
+    | Aplikace     |           |          |
+    | Pořadí       |           |          |
+    | Flexibilita  |           |          |
+    | Efektivita   |           |          |
+    |              |           |          |
 
 ---
 
