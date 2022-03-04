@@ -12,6 +12,8 @@
     - při zaplnění nastane výjimka java.lang.StackOverFlowError.
     - je threadsafe, protože každé vlákno má vlastní zásobník
 
+    ---
+
     - Heap (halda) se využívá pro dynamickou alokaci paměti objektů a tříd za běhu
     - nové objekty jsou vždy vytvářeny v prostoru haldy a odkazy na tyto objekty jsou uloženy v zásobníku
     - tyto objekty mají globální přístup (lze k nim přistupovat odkudkoli z aplikace)
