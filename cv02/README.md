@@ -41,9 +41,16 @@
         - Zabírá část výpočetního výkonu
 
     1. Stop the world
-  
+        - jsou to události, JVM pozastaví všechny vlákna, aby se mohl spustit GC
+        - Aplikace prakticky zastaví a nevykonává užitečnou práci – problém s timeout
+        - Aby mohly vlákna zaparkovat, musí dorazit do místa, odkud je to bezpečné (návrat z metody, konec cyklu) – safepoint
+        - Problém pro realtime aplikace
+        - Pro velkou haldu (100GB+) může trvat i desítky sekund - problém pro uživatele – timeout požadavků  
   
     2. GC roots
+        - jsou speciální objekty GC
+        - jsou to výchozí body, k nim jsou připojeny další objekty (dosažitelné), naopak ty, které nejsou připojeny k GC roots jsou nedosažitelné (je možné je poté odstranit GC).
+        - GC shromažďuje jen ty objekty, které nejsou kořeny GC (GC roots) a nejsou přístupné pomocí odkazů z kořene GC
 
 ---
 
