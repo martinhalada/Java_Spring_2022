@@ -3,7 +3,6 @@
 1. Describe JVM heap and stack. Which variables are stored on heap and which on stack
 
     - JVM rozděluje paměť na stack (zásobník) a heap (haldu)
-
     - Stack se v Javě používá pro statickou alokaci paměti, práci s vlákny.
     - Stack obsahuje hodnoty primitivních datových typů, referencí na objekty
     - přístup do této paměti je pomocí LIFO.
