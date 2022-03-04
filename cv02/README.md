@@ -3,6 +3,7 @@
 1. Describe JVM heap and stack. Which variables are stored on heap and which on stack
 
     - JVM rozděluje paměť na stack (zásobník) a heap (haldu)
+
     - Stack se v Javě používá pro statickou alokaci paměti, práci s vlákny.
     - Stack obsahuje hodnoty primitivních datových typů, referencí na objekty
     - přístup do této paměti je pomocí LIFO.
@@ -11,7 +12,14 @@
     - při zaplnění nastane výjimka java.lang.StackOverFlowError.
     - je threadsafe, protože každé vlákno má vlastní zásobník
 
-    -adad
+    - Heap (halda) se využívá pro dynamickou alokaci paměti objektů a tříd za běhu
+    - nové objekty jsou vždy vytvářeny v prostoru haldy a odkazy na tyto objekty jsou uloženy v zásobníku
+    - tyto objekty mají globální přístup (lze k nim přistupovat odkudkoli z aplikace)
+    - haldu lze rozdělit na menší části (generace) podle toho, jak dlouho jsou objekty alokovány - mladá, stará, trvalá
+    - při zaplnění nastane výjimka java.lang.OutOfMemoryError.
+    - přístup k haldě je pomalejší než do zásobníku
+    - oproti zásobníku není automaticky dealokována - je proto potřeba využít Garbage Collector
+    - oproti zásobníku není threadsafe a je třeba ji chránit správnou synchronizací kódu
 
 ---
 
