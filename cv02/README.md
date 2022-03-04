@@ -29,7 +29,7 @@
 
     - GC hlídá všechny objekty v haldě (heap) a odstraňuje nevyužívané.
     - GC vykonává 2 kroky = ,,Mark and Sweep´´
-            - Mark - GC detekuje která část paměti se používá a která ne
+        - Mark - GC detekuje která část paměti se používá a která ne
             - Sweep - při tomto kroku se odstraní objekty nalezené v předchozím kroku
     - Výhody GC
             - Není potřeba se zabývat alokací a uvolňováním paměti
