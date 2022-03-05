@@ -123,6 +123,20 @@
 8. Describe operand stack and local variables array
 
     - https://www.artima.com/insidejvm/ed2/jvm8.html
+    - podobně jako local variables, je operand stack organizovaný jako pole slov (array of worlds)
+    - Ale na rozdíl od lokálních proměnných, ke kterým se přistupuje prostřednictvím indexů pole, se k zásobníku operandů přistupuje pomocí push a pop.
+    - Pokud instrukce vloží hodnotu do zásobníku operandů, tak pozdější instrukce může použít pop a použít tuto hodnotu.
+    - Virtuální stroj ukládá do zásobníku operandů stejné datové typy
+    - Virtuální stroj Java používá zásobník operandů jako pracovní prostor. 
+    - Mnoho instrukcí vybírá hodnoty ze zásobníku operandů, pracuje s nimi a ukládá výsledek
+
+    ```
+    iload_0    // push the int in local variable 0
+    iload_1    // push the int in local variable 1
+    iadd       // pop two ints, add them, push result
+    istore_2   // pop int, store into local variable 2
+    ```
+    
 
 ---
 
