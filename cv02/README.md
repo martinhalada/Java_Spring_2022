@@ -154,9 +154,25 @@
 
     - Interpret převádí bytekód do strojového kódu řádek po řádku za běhu, bez změny pořadí sekvence
     - ve srovnání s kompilátorem, je vykonávání programu pomalejší
-    - kompiluje program do té doby dokud nenarazí na chybu
+    - program běží do té doby dokud se nenarazí na chybu
 
 ---
 
 10. What is JIT compilation, how does it work
+
+    - JIT = Just-In-Time
+    - označení pro speciální metodu překladu využívající různé techniky pro urychlení běhu programů přeložených do bajtkódu. 
+    - Program, který je spuštěn a prováděn, je v době provádění přeložen přímo do nativního strojového kódu počítače, na kterém je prováděn, čímž dochází k urychlení jeho běhu. 
+    - Negativem této techniky je prodleva, kterou JIT kompilátor (nikoli interpret) stráví překladem do nativního kódu, a proto se do nativního kódu často překládají jen mnohokrát (řádově 10 000×) volané úseky programu. 
+    - Hlavním problémem JIT je, že má málo času na provedení své práce. Tyto nevýhody lze eliminovat použitím trvalé cache. 
+    - Naopak výhodou je, že je možné lépe optimalizovat pro daný procesor a využít jeho rozšířených instrukcí.
+
+    - V době, kdy má být vykonán blok kódu, přeloží JIT kompilátor některé či všechny jeho části do strojového kódu pro lepší výkon. 
+    - Toto lze provést na soubor, na funkci nebo dokonce na libovolný fragment kódu. 
+    - Překlad tedy může být proveden až za běhu, odtud název Just In Time – Právě v čas. 
+    - Překlad může být uložen do souboru (disková cache) a pokud má být znovu použit později, není nutná opětovná kompilace.
+
+
+
+
 
