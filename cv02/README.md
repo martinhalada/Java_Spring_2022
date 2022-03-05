@@ -100,7 +100,7 @@
         - práce se zásobníkem (swap, dup2)
         - vyvolání metody a návrat (invokespecial, areturn)
     - Mnoho instrukcí má předpony/přípony odkazující na typy operandů, se kterými pracují:
-        | **předpona/přípona** | **typ operand** |
+        | **předpona/přípona** | **typ operandu** |
         |:-----------------:|:----------------:|
         | i                 | integer          |
         | l                 | long             |
