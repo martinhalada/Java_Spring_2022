@@ -137,10 +137,24 @@
     istore_2   // pop int, store into local variable 2
     ```
     
+    - Local variables array je ve framu zásobníku organizována jako pole slov indexované od nuly.
+    - instrukce, které používají hodnoty z oblasti lokálních proměnných poskytují indexy do pole (indexované od nuly)
+    - hodnoty typu int, float, reference a returnAddress zabírají jednu buňku pole.
+    - hodnoty typu byte, short, char jsou převedeny na int před uložením
+    - hodnoty typu long a double zabírají 2 buňky pole.
+    
 
 ---
 
 9. Describe how does bytecode interpretation works in runtime
+
+    - pro převedení bytekódu na strojový kód JVM používá Java interpret za běhu
+    - stejně tak, jako kompilátor převede zdrojový kód do bytekódu, tak stejně tak Java interpret převede bytekód do strojového kódu
+    - Java nejprve hledá třídu s metodou main(), jakmile ji JVM najde, tak interpret spustí aplikaci zavoláním metody main()
+
+    - Interpret převádí bytekód do strojového kódu řádek po řádku za běhu, bez změny pořadí sekvence
+    - ve srovnání s kompilátorem, je vykonávání programu pomalejší
+    - kompiluje program do té doby dokud nenarazí na chybu
 
 ---
 
