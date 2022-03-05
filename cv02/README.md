@@ -89,6 +89,28 @@
 
 6. Describe bytecode (groups, prefix/suffix, operand types)
 
+    - Bytekód je strojový kód pro JVM
+    - instrukce má 1 byte + parametry
+    - některé instrukce mají v názvu i typ (istore, astore, Istore, fstore)
+    - podle povahy lze instrukce rozdělit do několika skupin:
+        - načítání a uložení (aload_0, istore)
+        - aritmetické a logicné (ladd, fcmpl)
+        - konverze typů (i2b, d2i)
+        - vytváření objektů a manipulace s nimi (new, putfield)
+        - práce se zásobníkem (swap, dup2)
+        - vyvolání metody a návrat (invokespecial, areturn)
+    - Mnoho instrukcí má předpony/přípony odkazující na typy operandů, se kterými pracují:
+        | **předpona/přípona** | **typ operand** |
+        |:-----------------:|:----------------:|
+        | i                 | integer          |
+        | l                 | long             |
+        | s                 | short            |
+        | b                 | byte             |
+        | c                 | character        |
+        | f                 | float            |
+        | d                 | double           |
+        | a                 | reference        |
+
 ---
 
 7. How is bytecode generated and how can be viewed
