@@ -115,9 +115,14 @@
 
 7. How is bytecode generated and how can be viewed
 
+    - Vytvoření bytekódu: program (Program.java) se pomocí javac zkompiluje na Program.class
+    - Zobrazení bytekódu: javap -v Main.class
+
 ---
 
 8. Describe operand stack and local variables array
+
+    - https://www.artima.com/insidejvm/ed2/jvm8.html
 
 ---
 
