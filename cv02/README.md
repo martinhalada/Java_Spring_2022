@@ -92,7 +92,12 @@
 
 5. Compare G1 vs ZGC
     
-    - 
+    - G1 rozděluje haldu na stejně velké oblasti, ZGC na různě velké oblasti
+    - G1 má vyšší latenci než ZGC
+    - ZGC má kratší stop-the-world fáze
+    - G1 se používal hlavně do verze 10, ZGC se používá od verze 11
+    - ZGC provádí veškerou nákladnou práci současně, aniž by zastavil provádění aplikačních vláken na víc jak 10 ms
+    - ZGC pracuje s haldou v rozsahu od KB do několika TB
 
 ---
 
