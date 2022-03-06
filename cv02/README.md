@@ -5,11 +5,14 @@
     - JVM rozděluje paměť na stack (zásobník) a heap (haldu)
     - Stack se v Javě používá pro statickou alokaci paměti, práci s vlákny.
     - Stack obsahuje hodnoty primitivních datových typů, referencí na objekty, lokální proměnné, pořadí vykonávání metody
-    - přístup do této paměti je pomocí LIFO, protože je přístup globální
+    - přístup do této paměti je pomocí LIFO, (přístup je globální)
     - jakmile se ukončí vykonávání metody, tak se ,,stack frame´´ vyprázdní
     - proměnné uvnitř zásovníku existují tak dlouho, dokud je spuštěna metoda, která je vytvořila
     - při zaplnění nastane výjimka java.lang.StackOverFlowError.
     - je threadsafe, protože každé vlákno má vlastní zásobník
+    - stack je velikostně omezen na základě OS, a je menší než heap
+    - stack je rychlejší
+    - automatická alokace/dealokace při zavolání/navrácení z metody
 
     ---
 
@@ -21,6 +24,7 @@
     - přístup k haldě je pomalejší než do zásobníku
     - oproti zásobníku není automaticky dealokována - je proto potřeba využít Garbage Collector
     - oproti zásobníku není threadsafe a je třeba ji chránit správnou synchronizací kódu
+    - heap je pomalejší
 
 
 ---
@@ -39,10 +43,11 @@
         - Bez kontroly nad alokací a uvolňováním paměti
         - Stop the world události
         - Zabírá část výpočetního výkonu
+    - Různé implementace - sériový GC, paralelní GC, CMS, G1, ZGC
 
     1. Stop the world
         - jsou to události, JVM pozastaví všechny vlákna, aby se mohl spustit GC
-        - Aplikace prakticky zastaví a nevykonává užitečnou práci – problém s timeout
+        - Aplikace se prakticky zastaví a nevykonává užitečnou práci – problém s timeout
         - Aby mohly vlákna zaparkovat, musí dorazit do místa, odkud je to bezpečné (návrat z metody, konec cyklu) – safepoint
         - Problém pro realtime aplikace
         - Pro velkou haldu (100GB+) může trvat i desítky sekund - problém pro uživatele – timeout požadavků  
@@ -56,15 +61,15 @@
 
 3. Describe G1 collector
 
-    - Garbage-First (G1) collector je serverový GC, cílený na multiprocesorové stroje s velkou pamětí.
-    - G1 se používá v aplikacích, které mohou pracovat souběžně s aplikačními vlákny; nepotřebují věttší haldu; potřebují předvídatelné GC pauzy
+    - Garbage-First (G1) collector je cílený na multiprocesorové stroje s velkou pamětí.
+    - G1 se používá v aplikacích, které mohou pracovat souběžně s aplikačními vlákny, které nepotřebují větší haldu a které potřebují předvídatelné GC pauzy
     - flexibilní využití paměti
     - G1 provádí souběžnou fázi globálního označování pro určení životnosti objektů v celé haldě. Po dokončení fáze označení, G1 ví, které oblasti jsou většinou prázdné. Proto GC probíhá nejprve v těchto oblastech, obvykle je zde velké množství volného prostoru. To je důvod, proč se tato metoda nazývá Garbage-First. 
     - G1 není real-time collector
     - Princip: halda je rozdělena na sadu stějně velkých oblastí (asi 2000, 1-32 MB), každý má souvislý rozsah virtuální paměti, určitým sadám oblastí jsou přiřazeny stejné role (eden, survivor space, old generation)
     - Live objekty jsou zkopírovány/přesunuty do jedné nebo více oblastí, které přežily
     - oblasti mohou měnit svoji velikost podle potřeby
-    - G1 vybere oblasti s nejnižší „živostí“ (ty oblasti, které lze shromáždit nejrychleji).
+    - G1 vybere oblasti s nejnižší „životností“ (ty oblasti, které lze shromáždit nejrychleji).
 
     - Halda rodělena na mladou a starou generaci
     - zaměřuje se mladou generaci, kde je to nejefektivnější, částěčně se zaměřuje i na starou generaci
@@ -78,12 +83,16 @@
     - ZGC je navržen tak, aby zkrátil stop-the-world fázi na co nejkratší jak jde.
     - Dosahuje toho tím, že doba těchto pauz se nezvyšuje s velikostí haldy.
     - hodí se na serverové aplikace, kde jsou velké haldy běžné.
-    - využívá ,,barevných´´ (colored) 64 bitové reference
+    - ZGC provádí veškerou práci souběžně, bez zastavení provádění aplikačních vláken na dobu delší než 10 ms, díky čemuž je vhodný pro aplikace, které vyžadují nízkou latenci.
+    - využívá ,,barevné´´ (colored) 64 bitové reference. To znamená, že ZGC používá některé referenční bity (bity metadat) k označení stavu objektu.
+    - Podobně jako u G1, ZGC rozděluje haldu, ale zde oblasti haldy mohou mít různé velikosti.
     - https://www.baeldung.com/jvm-zgc-garbage-collector
 
 ---
 
 5. Compare G1 vs ZGC
+    
+    - 
 
 ---
 
@@ -115,7 +124,7 @@
 
 7. How is bytecode generated and how can be viewed
 
-    - Vytvoření bytekódu: program (Program.java) se pomocí javac zkompiluje na Program.class
+    - Vytvoření bytekódu: program (Program.java) se pomocí javac (javac Program.java) zkompiluje na Program.class
     - Zobrazení bytekódu: javap -v Main.class
 
 ---
@@ -154,7 +163,7 @@
 
     - Interpret převádí bytekód do strojového kódu řádek po řádku za běhu, bez změny pořadí sekvence
     - ve srovnání s kompilátorem, je vykonávání programu pomalejší
-    - program běží do té doby dokud se nenarazí na chybu
+    - program běží do té doby dokud se nenarazí na chybu (u kompilátoru se chyby vypíšou až na konci kompilace)
 
 ---
 
