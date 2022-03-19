@@ -22,9 +22,23 @@
     - Elementy v Super POM jsou: repositories, pluginRepositories, build, reporting a profiles
 
 4. Describe Maven build livecycle
+    
+    - Maven je založen na konceptu životního cyklu. To znamená, že proces sestavení a distribuce konkrétního artefaktu (projektu) je jasně definován.
+    - Existují tři vestavěné životní cykly: default, clean a site. Default se stará o nasazení projektu, clean se stará o čištění projektu (odstraňuje všechny soubory vygenerované předchozím buildem), site se stará o vytvoření webové stránky projektu.
+    - Každý z těchto životních cyklů je definován jiným seznamem fází
+    - default životní cyklus se například skládá z následujících fází: validate, compile, test, package, verify, install, deploy (celkem jich je 23), clean jich má jen 3 a site 4.
 
 
 5. Describe Maven goals
 
+    - Každá fáze je posloupnost cílů (goal), které jsou zodpovědné za specifické úkoly
+    - Když spustíme fázi – všechny cíle vázané na tuto fázi jsou splněny v daném pořadí.
 
 6. How are project dependencies managed by Maven
+
+    - V Mavenu existují 2 typy závislostí: přímé a tranzitivní
+    - Přímé závislosti jsou ty, které výslovně zahrneme do projektu.
+    - Ty lze zahrnout pomocí tagů <dependency>
+    - Na druhou stranu tranzitivní závislosti vyžadují přímé závislosti. Maven automaticky zahrnuje požadované tranzitivní závislosti do našeho projektu.
+    - Můžeme vypsat všechny závislosti včetně tranzitivních závislostí v projektu pomocí příkazu: mvn dependency:tree
+    - 
