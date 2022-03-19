@@ -41,4 +41,4 @@
     - Ty lze zahrnout pomocí tagů <dependency>
     - Na druhou stranu tranzitivní závislosti vyžadují přímé závislosti. Maven automaticky zahrnuje požadované tranzitivní závislosti do našeho projektu.
     - Můžeme vypsat všechny závislosti včetně tranzitivních závislostí v projektu pomocí příkazu: mvn dependency:tree
-    - 
+    - Rozsahy závislostí (scopes) pomáhají omezit tranzitivní závislost. Také upravují classpath pro různé úlohy. Maven má šest výchozích rozsahů závislostí (compile, provided, runtime, test, system, import).
