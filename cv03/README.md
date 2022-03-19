@@ -9,7 +9,17 @@
   
 2. Describe Maven POM
 
+    - Maven POM (Project Object Model) je označení pro XML reprezentaci projektu Maven uloženou v souboru s názvem pom.xml, jsou v něm obsaženy informace o projektu včetně konfiguračních detailů.
+    - nachází se v kořenovém adresáři každého projektu.
+    - Obsahuje popis projektu, informace o verzi, konfikurační detaily, závislosti, pluginy včetně jejich konfigurací
+    - Každý soubor pom.xml představuje jeden projekt (artefakt). Artefakt je jednoznačně identifikován skupinou (groupId), názvem (artifactId) a verzí (version).
+
+
 3. What is Super POM
+
+    - Super POM je výchozí Maven POM. Všechny soubory POM dědí ze Super POM.
+    - Soubor super POM definuje všechny výchozí konfigurace. I ta nejjednodušší forma souboru POM tedy zdědí všechny konfigurace definované v souboru super POM.
+    - Elementy v Super POM jsou: repositories, pluginRepositories, build, reporting a profiles
 
 4. Describe Maven build livecycle
 
