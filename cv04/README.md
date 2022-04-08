@@ -21,14 +21,25 @@
     - @autowired = anotace slouží k automatickému propojení vztahů mezi spolupracujícími beany 
                 
         - Anotace @Autowired se defaultně chová jako „byType“ (Hledá bean příslušného typu a použije reference na něj)
+        - Anotace se může zapsat nad konstruktorem, setterem, nebo atributem
    
-    - @component
+    - @component 
+        - Anotace umožňuje Springu automaticky detekovat naše vlastní beany, to znamená, že Spring v naší aplikaci vyhledá třídy označené touto anotací, vytvoří a vloží do nich jakékoli zadané závislosti a injektuje je tak, kde je potřeba
+        - Spring při inicializaci takto anotované třídy vyhledává a automaticky z nich v případě potřeby vytváří beany
+        - V rámci XML konfigurace je nutné nastavit, v jakém balíku budou třídy vyhledávány
+        - Pokud chceme definici beanů z XML vyjmout, je nutné je definovat v kódu
     
     - @configuration
+        - Anotace slouží pro označení třídy, která slouží jako konfigurační třída
+        - Třída musí mít definovaný prázdný konstruktor, pokud není definovaný žádný konstruktor, Java kompiler prázdný vytvoří defaultně
+        - Kontext Springu se pak nevytváří z XML, ale z této třídy
     
     - @qualifier
+        - V rámci konfiguračních tříd je možné používat funkci Autowire
+        - Při použití @Autowire je možné použít anotaci @Qualifier pro vybírání si z více beanů daného typu
     
     - @ComponentScan
+        - Anotace @ComponentScan nad konfigurační třídou nahrazuje XML tag
 
 
 4. What does bean represent in Spring
