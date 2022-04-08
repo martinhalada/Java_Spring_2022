@@ -19,7 +19,7 @@
 3. Describe annotations
     - anotace slouží pro konfiguraci, stejně jako XML, anotace jsou flexibilnější než XML a lze je s ním i kombinovat, nebo s Java konfigurací
     - @autowired = anotace slouží k automatickému propojení vztahů mezi spolupracujícími beany 
-                - Anotace @Autowiredse defaultně chová jako „byType“ (Hledá bean příslušného typu a použije reference na něj)
+                - Anotace @Autowired se defaultně chová jako „byType“ (Hledá bean příslušného typu a použije reference na něj)
    
     - @component
     
