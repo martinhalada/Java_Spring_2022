@@ -43,7 +43,19 @@
 
 
 4. What does bean represent in Spring
+    - Bean je objekt, který je spravován frameworkem Spring
+    - Je vytvořený a řízený na základě konfigurace (Ta určuje všechny jeho další vlastnosti: třídu které náleží, jméno, rozsah platnosti, způsob inicializace)
+    - Každý bean má také svůj životní cyklus
 
 5. Describe difference between Singleton and Prototype bean scope
+    - Singleton je defaultní rozsah platnosti, daný bean existuje v kontejneru pouze jeden
+    - hodí se například při vytváření objektů reprezentujících připojení k databázi
+    - vícenásobné zavolání metody getBean vrátí vždy stejný objekt
+    - Prototype = bean existuje v kontejneru vícekrát
+    - zavolání metody getBean vrátí vždy nový objekt
 
 6. Describe bean lifecycle events
+    - Spring vkládá a odstraňuje beany z kontejneru v rámci posloupnosti řady operací
+    - Na tyto operace lze navěsit metody, které budou zavolány, pokud bude daná operace životního cyklu provedena
+    - Základní operace jsou Init() a Destroy()
+    - Existují i další interface, jejichž implementací je možné získat callback metody na další operace životního cyklu
