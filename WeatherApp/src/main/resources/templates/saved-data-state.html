@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Weather app</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a href="/">Zpět</a>
+<h1>Naměřená data pro stát</h1>
+
+<table th:each="city: ${savedWeatherDataState}">
+    <thead>
+    <tr>
+        <th>Datum</th>
+        <th>Teplota</th>
+        <th>Tlak</th>
+        <th>Vlhkost</th>
+        <th>Oblačnost</th>
+        <th>Dohlednost</th>
+        <th>Rychlost větru</th>
+        <th>Směr větru</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="data: ${city}">
+        <td th:text="${data.getDate()}"/>
+        <td th:text="${data.getTemp()}"/>
+        <td th:text="${data.getPressure()}"/>
+        <td th:text="${data.getHumidity()}"/>
+        <td th:text="${data.getClouds()}"/>
+        <td th:text="${data.getVisibility()}"/>
+        <td th:text="${data.getWindSpeed()}"/>
+        <td th:text="${data.getWindDegree()}"/>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

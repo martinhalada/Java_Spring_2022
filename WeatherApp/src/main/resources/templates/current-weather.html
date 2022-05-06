@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Weather app</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a href="/">Zpět</a>
+<h1 th:text="'Aktální naměřená data pro lokaci: ' + ${currentWeather.getLocationName()}" ></h1>
+<div>
+    <p th:text="'Datum: ' + ${currentWeather.getDate()}"></p>
+    <p th:text="'Teplota: ' + ${currentWeather.getTemp()} + ' °C'"></p>
+    <p th:text="'Tlak: ' + ${currentWeather.getPressure()} + ' hPa'"></p>
+    <p th:text="'Vlhkost: ' + ${currentWeather.getHumidity()} + ' %'"></p>
+    <p th:text="'Oblačnost: ' + ${currentWeather.getClouds()} + ' %'"></p>
+    <p th:text="'Dohlednost: ' + ${currentWeather.getVisibility()} + ' m'"></p>
+    <p th:text="'Rychlost větru: ' + ${currentWeather.getWindSpeed()} + ' m/s'"></p>
+    <p th:text="'Směr větru: ' + ${currentWeather.getWindDegree()} + ' °'"></p>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>Datum</th>
+        <th>Teplota</th>
+        <th>Tlak</th>
+        <th>Vlhkost</th>
+        <th>Oblačnost</th>
+        <th>Dohlednost</th>
+        <th>Rychlost větru</th>
+        <th>Směr větru</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="city: ${savedWeatherDataCity}">
+        <td th:text="${city.date}"/>
+        <td th:text="${city.temp}"/>
+        <td th:text="${city.pressure}"/>
+        <td th:text="${city.humidity}"/>
+        <td th:text="${city.clouds}"/>
+        <td th:text="${city.visibility}"/>
+        <td th:text="${city.windSpeed}"/>
+        <td th:text="${city.windDegree}"/>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
