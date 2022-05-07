@@ -1,27 +1,40 @@
 package com.example.weatherapp.controllers;
 
 import com.example.weatherapp.models.City;
-import com.example.weatherapp.models.CurrentWeather;
 import com.example.weatherapp.models.State;
 import com.example.weatherapp.models.WeatherData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
+@EnableScheduling
 public class StateController {
     Service service;
     LiveWeatherService liveWeatherService;
+    ThreadPoolTaskScheduler threadPoolTaskScheduler;
+
+    @Value("${weather.updateInterval}")
+    private int updateInterval;
 
     @Autowired
     public StateController(Service service, LiveWeatherService liveWeatherService) {
         this.service = service;
         this.liveWeatherService = liveWeatherService;
+    }
+
+    @Autowired
+    public void setThreadPoolTaskScheduler(ThreadPoolTaskScheduler threadPoolTaskScheduler) {
+        this.threadPoolTaskScheduler = threadPoolTaskScheduler;
+        downloadNewData();
     }
 
     @RequestMapping(value = "/createState", method = RequestMethod.POST)
@@ -71,8 +84,21 @@ public class StateController {
     @RequestMapping(value="/search/state", method=RequestMethod.GET)
     public String searchForMeteoDataState(Model model, @RequestParam(value = "code") String code){
         List<List<WeatherData>> dataForState = service.getCitiesAndDataForState(code);
+        model.addAttribute("stateCode",code);
         model.addAttribute("savedWeatherDataState", dataForState);
         return "saved-data-state";
+    }
+
+    private void downloadNewData(){
+        threadPoolTaskScheduler.scheduleAtFixedRate(this::download, updateInterval);
+    }
+    private void download(){
+        System.out.println("Downloading new data");
+        List<City> cities = service.getCities();
+        for(City city : cities){
+            WeatherData weatherData = liveWeatherService.getCurrentWeather(city.getName(), city.getRegion());
+            service.createWeatherData(weatherData);
+        }
     }
 
     @RequestMapping(value="/states/{name}", method=RequestMethod.GET)

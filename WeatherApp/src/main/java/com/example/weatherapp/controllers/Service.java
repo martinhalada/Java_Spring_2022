@@ -107,6 +107,12 @@ public class Service {
 
     public void createWeatherData(WeatherData weatherData){
         /** uloží nové měření */
+        String cityName = weatherData.getLocationName();
+        long newTime = weatherData.getTime();
+        WeatherData savedData = weatherDataRepository.findFirstByLocationNameAndTimeEquals(cityName, newTime);
+        if (savedData!=null){
+            return;
+        }
         weatherDataRepository.save(weatherData);
     }
     public void deleteWeatherData(WeatherData weatherData){

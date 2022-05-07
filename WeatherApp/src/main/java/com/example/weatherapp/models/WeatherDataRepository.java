@@ -9,4 +9,5 @@ import java.util.List;
 public interface WeatherDataRepository extends MongoRepository<WeatherData, String> {
 
     public List<WeatherData> findByLocationName(String locationName);
+    WeatherData findFirstByLocationNameAndTimeEquals(String locationName, long time);
 }
