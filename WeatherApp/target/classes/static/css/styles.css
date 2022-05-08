@@ -1,0 +1,18 @@
+table {
+    border-collapse: collapse;
+}
+table td, th {
+    padding: 10px;
+}
+table thead tr {
+    background-color: #484646;
+    color: #ffffff;
+    border: 1px solid #000000;
+}
+table tbody tr, td {
+    color: #000000;
+    border: 1px solid #000000;
+}
+table tbody tr {
+    background-color: #ffffff;
+}
