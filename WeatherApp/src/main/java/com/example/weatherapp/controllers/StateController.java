@@ -100,13 +100,4 @@ public class StateController {
             service.createWeatherData(weatherData);
         }
     }
-
-    @RequestMapping(value="/states/{name}", method=RequestMethod.GET)
-    public List<List<WeatherData>> getState(@PathVariable(value = "name") String name) {
-        return service.getCitiesAndDataForState(name);
-    }
-    @RequestMapping(value="/states/", method=RequestMethod.DELETE)
-    public void deleteStates() {
-        service.deleteStates();
-    }
 }

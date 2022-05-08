@@ -73,6 +73,9 @@ public class Service {
         City city = new City(name, stateCode, state);
         cityRepository.save(city);
     }
+    public void createNewCity(City city){
+        createNewCity(city.getName(), city.getRegion());
+    }
 
     public List<City> getCities(){
         /** vrátí seznam všech měst */

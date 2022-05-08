@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.persistence.Entity;
 
 @SpringBootApplication
-@ComponentScan({"com.example.weatherapp.config", "com.example.weatherapp.controllers","com.example.weatherapp.models"})
+@ComponentScan({"com.example.weatherapp.config", "com.example.weatherapp.controllers","com.example.weatherapp.models", "com.example.weatherapp.rest"})
 @EntityScan("com.example.weatherapp.models")
 @EnableMongoRepositories
 public class WeatherAppApplication implements CommandLineRunner {
@@ -33,6 +33,7 @@ public class WeatherAppApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception{
+        System.out.println("Aplikace spuštěna");
         /**
         //repository.deleteAll();
 

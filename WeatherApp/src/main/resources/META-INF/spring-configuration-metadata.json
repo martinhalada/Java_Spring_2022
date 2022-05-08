@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "weather.apikey",
+      "type": "java.lang.String",
+      "description": "Description for weather.apikey."
+    },
+    {
+      "name": "weather.updateInterval",
+      "type": "java.lang.String",
+      "description": "Description for weather.updateInterval."
+    },
+    {
+      "name": "weather.expire",
+      "type": "java.lang.String",
+      "description": "Description for weather.expire."
+    }
+  ] }
