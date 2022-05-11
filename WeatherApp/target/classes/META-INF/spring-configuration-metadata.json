@@ -14,5 +14,20 @@
       "name": "weather.expire",
       "type": "java.lang.String",
       "description": "Description for weather.expire."
+    },
+    {
+      "name": "weather.csvFileName",
+      "type": "java.lang.String",
+      "description": "Description for weather.csvFileName."
+    },
+    {
+      "name": "weather.csvToUpload",
+      "type": "java.lang.String",
+      "description": "Description for weather.csvToUpload."
+    },
+    {
+      "name": "weather.readOnly",
+      "type": "java.lang.String",
+      "description": "Description for weather.readOnly."
     }
   ] }

@@ -6,7 +6,6 @@ import com.example.weatherapp.models.WeatherData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +20,8 @@ public class StateController {
     Service service;
     LiveWeatherService liveWeatherService;
     ThreadPoolTaskScheduler threadPoolTaskScheduler;
+    @Value("${weather.readOnly}")
+    private boolean readOnly;
 
     @Value("${weather.updateInterval}")
     private int updateInterval;
@@ -33,21 +34,32 @@ public class StateController {
 
     @Autowired
     public void setThreadPoolTaskScheduler(ThreadPoolTaskScheduler threadPoolTaskScheduler) {
+        if(readOnly){
+            return;
+        }
         this.threadPoolTaskScheduler = threadPoolTaskScheduler;
         downloadNewData();
     }
 
     @RequestMapping(value = "/createState", method = RequestMethod.POST)
     public String createState(HttpServletRequest request, @RequestParam(value="name") String name, @RequestParam(value="code") String code){
+        String referer = request.getHeader("Referer");
+        if(readOnly){
+            return "redirect:" + referer;
+        }
         State state = new State(name,code);
         service.createNewState(state);
-        String referer = request.getHeader("Referer");
+
         return "redirect:" + referer;
     }
     @RequestMapping(value = "/createCity", method = RequestMethod.POST)
     public String createCity(HttpServletRequest request, @RequestParam(value="name") String name, @RequestParam(value="region") String region){
-        service.createNewCity(name, region);
         String referer = request.getHeader("Referer");
+        if(readOnly){
+            return "redirect:" + referer;
+        }
+        service.createNewCity(name, region);
+
         return "redirect:" + referer;
     }
     @RequestMapping(value="/", method=RequestMethod.GET)
@@ -60,18 +72,29 @@ public class StateController {
     }
     @RequestMapping(value="/deleteCity", method=RequestMethod.POST)
     public String deleteCity(HttpServletRequest request, @RequestParam(value = "name") String name) {
-        service.deleteCity(name);
         String referer = request.getHeader("Referer");
+        if(readOnly){
+            return "redirect:" + referer;
+        }
+        service.deleteCity(name);
+
         return "redirect:" + referer;
     }
     @RequestMapping(value="/deleteState", method=RequestMethod.POST)
     public String deleteState(HttpServletRequest request, @RequestParam(value = "code") String code) {
-        service.deleteState(code);
         String referer = request.getHeader("Referer");
+        if(readOnly){
+            return "redirect:" + referer;
+        }
+        service.deleteState(code);
         return "redirect:" + referer;
     }
     @RequestMapping(value="/search/city", method=RequestMethod.GET)
-    public String searchForMeteoData(Model model, @RequestParam(value = "name") String name, @RequestParam(value = "code") String code){
+    public String searchForMeteoData(HttpServletRequest request, Model model, @RequestParam(value = "name") String name, @RequestParam(value = "code") String code){
+        String referer = request.getHeader("Referer");
+        if(readOnly){
+            return "redirect:" + referer;
+        }
         WeatherData weatherData = liveWeatherService.getCurrentWeather(name, code);
         service.createWeatherData(weatherData);
         service.createNewCity(name, code);

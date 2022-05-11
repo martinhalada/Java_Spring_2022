@@ -1,6 +1,5 @@
 package com.example.weatherapp.controllers;
 
-import com.example.weatherapp.models.CurrentWeather;
 import com.example.weatherapp.models.WeatherData;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriTemplate;
 
-import java.math.BigDecimal;
 import java.net.URI;
 
 @Service
@@ -56,10 +54,6 @@ public class LiveWeatherService {
             float clouds = (float)root.path("clouds").path("all").asDouble();;
 
             return new WeatherData(locationName, country, time, temp, pressure, humidity, visibility, windSpeed, windDegree, clouds);
-            //return new CurrentWeather(root.path("weather").get(0).get("main").asText(),
-            //        BigDecimal.valueOf(root.path("main").path("temp").asDouble()),
-            //        BigDecimal.valueOf(root.path("main").path("feels_like").asDouble()),
-            //        BigDecimal.valueOf(root.path("wind").path("speed").asDouble()));
         }catch (JsonProcessingException e){
             throw new RuntimeException("Error parsing JSON", e);
         }

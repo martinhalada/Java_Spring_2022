@@ -1,7 +1,5 @@
 package com.example.weatherapp.models;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -30,6 +28,9 @@ public class WeatherData {
     @Field
     Date date; //UTC
 
+    public WeatherData() {
+    }
+
     public WeatherData(String locationName, String country, long time, float temp, float pressure, float humidity, float visibility, float windSpeed, float windDegree, float clouds) {
         this.locationName = locationName;
         this.country = country;
@@ -42,6 +43,20 @@ public class WeatherData {
         this.windDegree = windDegree;
         this.clouds = clouds;
         date = Date.from(Instant.now());
+    }
+
+    public WeatherData(String locationName, String country, long time, float temp, float pressure, float humidity, float visibility, float windSpeed, float windDegree, float clouds, Date date) {
+        this.locationName = locationName;
+        this.country = country;
+        this.time = time;
+        this.temp = temp;
+        this.pressure = pressure;
+        this.humidity = humidity;
+        this.visibility = visibility;
+        this.windSpeed = windSpeed;
+        this.windDegree = windDegree;
+        this.clouds = clouds;
+        this.date = date;
     }
 
     public String getId() {

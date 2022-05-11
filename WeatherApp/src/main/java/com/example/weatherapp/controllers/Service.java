@@ -9,29 +9,29 @@ import java.util.List;
 
 @org.springframework.stereotype.Service
 public class Service {
-    private final WeatherDataRepository weatherDataRepository;
-    private final StateRepository stateRepository;
-    private final CityRepository cityRepository;
+    private final WeatherDataRepositoryImpl weatherDataRepositoryImpl;
+    private final StateRepositoryImpl stateRepositoryImpl;
+    private final CityRepositoryImpl cityRepositoryImpl;
 
     @Autowired
-    public Service(WeatherDataRepository weatherDataRepository, StateRepository stateRepository, CityRepository cityRepository){
-        this.weatherDataRepository=weatherDataRepository;
-        this.stateRepository=stateRepository;
-        this.cityRepository=cityRepository;
+    public Service(WeatherDataRepositoryImpl weatherDataRepositoryImpl, StateRepositoryImpl stateRepositoryImpl, CityRepositoryImpl cityRepositoryImpl){
+        this.weatherDataRepositoryImpl = weatherDataRepositoryImpl;
+        this.stateRepositoryImpl = stateRepositoryImpl;
+        this.cityRepositoryImpl = cityRepositoryImpl;
     }
 
     public void createNewState(State newState){
         /** Vytvoří nový stát */
-        stateRepository.save(newState);
+        stateRepositoryImpl.save(newState);
     }
     public List<State> getAllStates(){
         /** Vrátí seznam všech států */
-        return stateRepository.findAll();
+        return stateRepositoryImpl.findAll();
     }
 
     public State getState(String code){
         /** vrátí stát */
-        return stateRepository.findStateByCode(code);
+        return stateRepositoryImpl.findStateByCode(code);
     }
 
     public List<List<WeatherData>> getCitiesAndDataForState(String code){
@@ -46,9 +46,9 @@ public class Service {
     }
     public void deleteStates(){
         /** smaže úplně všechna data */
-        weatherDataRepository.deleteAll();
-        cityRepository.deleteAll();
-        stateRepository.deleteAll();
+        weatherDataRepositoryImpl.deleteAll();
+        cityRepositoryImpl.deleteAll();
+        stateRepositoryImpl.deleteAll();
     }
     @Transactional
     public void deleteState(String code){
@@ -57,7 +57,7 @@ public class Service {
         for(City city : cities){
             deleteCity(city.getName());
         }
-        stateRepository.deleteStateByCode(code);
+        stateRepositoryImpl.deleteStateByCode(code);
     }
 
     public void createNewCity(String name, String stateCode){
@@ -71,7 +71,7 @@ public class Service {
         }
         State state = getState(stateCode);
         City city = new City(name, stateCode, state);
-        cityRepository.save(city);
+        cityRepositoryImpl.save(city);
     }
     public void createNewCity(City city){
         createNewCity(city.getName(), city.getRegion());
@@ -79,10 +79,10 @@ public class Service {
 
     public List<City> getCities(){
         /** vrátí seznam všech měst */
-        return cityRepository.findAll();
+        return cityRepositoryImpl.findAll();
     }
     public List<City> getCitiesForState(String stateCode){
-        return cityRepository.findCitiesByStateCode(stateCode);
+        return cityRepositoryImpl.findCitiesByStateCode(stateCode);
     }
     public List<WeatherData> getDataForCity(String name){
         /** vrátí všechna měření pro dané město */
@@ -90,13 +90,13 @@ public class Service {
     }
 
     public boolean existsCity(String name){
-        return cityRepository.existsCity(name);
+        return cityRepositoryImpl.existsCity(name);
     }
 
     public void deleteCities(){
         /** smaže všechna města a tím pádem i všechna měření */
-        weatherDataRepository.deleteAll();
-        cityRepository.deleteAll();
+        weatherDataRepositoryImpl.deleteAll();
+        cityRepositoryImpl.deleteAll();
     }
     @Transactional
     public void deleteCity(String name){
@@ -105,25 +105,29 @@ public class Service {
         for(WeatherData data : weatherData){
             deleteWeatherData(data);
         }
-        cityRepository.deleteCityByName(name);
+        cityRepositoryImpl.deleteCityByName(name);
     }
 
     public void createWeatherData(WeatherData weatherData){
         /** uloží nové měření */
         String cityName = weatherData.getLocationName();
         long newTime = weatherData.getTime();
-        WeatherData savedData = weatherDataRepository.findFirstByLocationNameAndTimeEquals(cityName, newTime);
+        WeatherData savedData = weatherDataRepositoryImpl.findFirstByLocationNameAndTimeEquals(cityName, newTime);
         if (savedData!=null){
             return;
         }
-        weatherDataRepository.save(weatherData);
+        weatherDataRepositoryImpl.save(weatherData);
     }
     public void deleteWeatherData(WeatherData weatherData){
         /** smaže měření */
-        weatherDataRepository.delete(weatherData);
+        weatherDataRepositoryImpl.delete(weatherData);
     }
     public List<WeatherData> getWeatherData(String city){
         /** vrátí měření pro dané město */
-        return weatherDataRepository.findByLocationName(city);
+        return weatherDataRepositoryImpl.findByLocationName(city);
+    }
+    public List<WeatherData> getAllWeatherData(){
+        /** vrátí všechna měření */
+        return weatherDataRepositoryImpl.findAll();
     }
 }
