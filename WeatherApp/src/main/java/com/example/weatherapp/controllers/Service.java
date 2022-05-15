@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @org.springframework.stereotype.Service
 public class Service {
@@ -22,7 +25,10 @@ public class Service {
 
     public void createNewState(State newState){
         /** Vytvoří nový stát */
-        stateRepositoryImpl.save(newState);
+        //if (getState(newState.getCode()) == null) {
+        if (!existsState(newState.getCode())){
+            stateRepositoryImpl.save(newState);
+        }
     }
     public List<State> getAllStates(){
         /** Vrátí seznam všech států */
@@ -65,7 +71,7 @@ public class Service {
         if (existsCity(name)){
             return;
         }
-        if (getState(stateCode) == null){
+        if (!existsState(stateCode)){
             State state = new State(stateCode);
             createNewState(state);
         }
@@ -91,6 +97,9 @@ public class Service {
 
     public boolean existsCity(String name){
         return cityRepositoryImpl.existsCity(name);
+    }
+    public boolean existsState(String code){
+        return stateRepositoryImpl.existsState(code);
     }
 
     public void deleteCities(){
@@ -129,5 +138,12 @@ public class Service {
     public List<WeatherData> getAllWeatherData(){
         /** vrátí všechna měření */
         return weatherDataRepositoryImpl.findAll();
+    }
+
+    public boolean isInputValid(String text){
+        if (!text.matches("[a-žA-Ž ]+")){
+            return false;
+        }
+        return true;
     }
 }

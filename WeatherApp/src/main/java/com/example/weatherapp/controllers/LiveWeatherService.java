@@ -1,9 +1,12 @@
 package com.example.weatherapp.controllers;
 
+import com.example.weatherapp.WeatherAppApplication;
 import com.example.weatherapp.models.WeatherData;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +26,9 @@ public class LiveWeatherService {
 
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(LiveWeatherService.class);
+
 
     public LiveWeatherService(RestTemplateBuilder restTemplateBuilder, ObjectMapper objectMapper){
         this.restTemplate=restTemplateBuilder.build();
@@ -55,7 +61,8 @@ public class LiveWeatherService {
 
             return new WeatherData(locationName, country, time, temp, pressure, humidity, visibility, windSpeed, windDegree, clouds);
         }catch (JsonProcessingException e){
-            throw new RuntimeException("Error parsing JSON", e);
+            LOGGER.error("Error while parsing JSON");
+            throw new RuntimeException("Error parsing JSON ", e);
         }
     }
 }
