@@ -67,5 +67,15 @@
 6. Describe following application containerization terms
 
     - Image
+        - Image je neměnný soubor, který obsahuje zdrojový kód, knihovny, závislosti, nástroje a další soubory potřebné ke spuštění aplikace.
+        - Vzhledem k tomu, že tyto obrazy jsou určeny pouze pro čtení, jsou někdy označovány jako snapshoty. P
+        - ředstavují aplikaci a její virtuální prostředí v určitém časovém okamžiku
     - Repository
+        - Repository je kolekce souvisejících obrazů kontejnerů, které slouží k poskytování různých verzí aplikace.
+        - V repozitářích se ukládají obrazy pro nastavení a nasazení. 
+        - Úložiště se mohou používat ke správě, stahování a odesílání obrazů.
     - Container
+        - Kontejner je virtualizované běhové prostředí, ve kterém mohou uživatelé izolovat aplikace od základního systému.
+        - Tyto kontejnery jsou kompaktní přenosné jednotky, ve kterých lze snadno a rychle spustit aplikaci.
+        - Protože jsou kontejnery autonomní, poskytují silnou izolaci, která zajišťuje, že neruší ostatní spuštěné kontejnery, stejně jako server, který je podporuje. 
+        - Na rozdíl od virtuálních počítačů (VM), kde virtualizace probíhá na úrovni hardwaru, kontejnery virtualizují na úrovni aplikace. Mohou využívat jeden stroj, sdílet jeho jádro a virtualizovat operační systém pro běh izolovaných procesů. Díky tomu jsou kontejnery extrémně lehké, což umožňuje zachovat cenné zdroje.
