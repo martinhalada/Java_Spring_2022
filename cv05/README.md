@@ -46,7 +46,22 @@
 5. Describe one of open source logging stack
 
     - ELK
+        - ELK Stack je soubor tří open-source produktů - Elasticsearch, Logstash a Kibana. 
+        - ELK stack poskytuje centralizovaný logging za účelem identifikace problémů se servery nebo aplikacemi. 
+        - Umožňuje prohledávat všechny protokoly na jednom místě. 
+        - Pomáhá také najít problémy na více serverech propojením logů v určitém časovém úseku.
+        - Zkratka E znamená ElasticSearch: slouží k ukládání protokolů.
+        - L znamená LogStash : používá se jak k odesílání, tak ke zpracování a ukládání protokolů.
+        - K znamená Kibana: je vizualizační nástroj (webové rozhraní), který je hostován prostřednictvím Nginx nebo Apache.
+    
     - Grafana + Loki
+        - Grafana je multiplatformní open source analytická a interaktivní vizualizační webová aplikace. 
+        - Po připojení k podporovaným zdrojům dat poskytuje grafy, diagramy a upozornění pro web. 
+        - Je rozšiřitelná pomocí systému zásuvných modulů.
+        - Koncoví uživatelé mohou vytvářet komplexní monitorovací panely pomocí interaktivních nástrojů pro tvorbu dotazů.
+        - Grafana se dělí na front end a back end napsané v jazyce TypeScript, respektive Go.
+        - Loki je horizontálně škálovatelný, vysoce dostupný systém agregace logů pro více uživatelů inspirovaný systémem Prometheus. 
+        - Neindexuje obsah protokolů, ale spíše sadu štítků pro každý tok protokolů.
 
 
 6. Describe following application containerization terms
