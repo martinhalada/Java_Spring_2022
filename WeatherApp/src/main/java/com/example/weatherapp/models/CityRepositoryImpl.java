@@ -73,4 +73,18 @@ public class CityRepositoryImpl {
         exists = count > 0;
         return exists;
     }
+
+    public boolean updateCity(String oldName, String newName, String code){
+        if(!souradniceEquals(oldName, newName, code)){
+            deleteCityByName(oldName);
+            save(new City(newName, code, new State(code)));
+            return false;
+        }
+        jdbcTemplate.update("UPDATE City SET name = ? WHERE name = ? AND region = ?", newName, oldName, code);
+        return true;
+    }
+
+    public boolean souradniceEquals(String oldName, String newName, String code){
+        return true;
+    }
 }

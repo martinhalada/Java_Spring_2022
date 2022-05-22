@@ -15,11 +15,11 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriTemplate;
 
 import java.net.URI;
+import java.util.Objects;
 
 @Service
 public class LiveWeatherService {
 
-    //private static final String WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather?q={city},{country}&APPID={key}&units=metric";
     private static final String WEATHER_URL =  "https://api.openweathermap.org/data/2.5/weather?q={city},\"\",{country}&appid={API key}&units=metric&lang=cz";
     @Value("${weather.apikey}")
     private String apiKey;
@@ -38,17 +38,22 @@ public class LiveWeatherService {
     public WeatherData getCurrentWeather(String city, String country) {
         URI url = new UriTemplate(WEATHER_URL).expand(city,country,apiKey);
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
-        WeatherData weatherData = convert(response);
+        WeatherData weatherData = convert(response, country);
         weatherData.setLocationName(city);
         return weatherData;
     }
 
-    private WeatherData convert(ResponseEntity<String> response){
+    private WeatherData convert(ResponseEntity<String> response, String countryCode){
         try{
             JsonNode root = objectMapper.readTree(response.getBody());
 
             String locationName = root.path("name").asText();
             String country = root.path("sys").path("country").asText();
+            if(!country.equalsIgnoreCase(countryCode)){
+                //ochrana kvůli tomu, že openweathermap někdy nebere ohled na kód státu
+                // (takže by např. prošel název města: AA s kódem země: CZ => vrátí to data pro město: Aa s kódem země: EE
+                throw new IllegalArgumentException("City not found");
+            }
             long time = root.path("dt").asLong();
 
             float temp = (float)root.path("main").path("temp").asDouble();

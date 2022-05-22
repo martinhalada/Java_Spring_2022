@@ -6,9 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @org.springframework.stereotype.Service
 public class Service {
@@ -24,24 +21,20 @@ public class Service {
     }
 
     public void createNewState(State newState){
-        /** Vytvoří nový stát */
         //if (getState(newState.getCode()) == null) {
         if (!existsState(newState.getCode())){
             stateRepositoryImpl.save(newState);
         }
     }
     public List<State> getAllStates(){
-        /** Vrátí seznam všech států */
         return stateRepositoryImpl.findAll();
     }
 
     public State getState(String code){
-        /** vrátí stát */
         return stateRepositoryImpl.findStateByCode(code);
     }
 
     public List<List<WeatherData>> getCitiesAndDataForState(String code){
-        /** pro daný stát, vrátí pro každé jeho město jeho naměřená data */
         List<City> cities = getCitiesForState(code);
         List<List<WeatherData>> lists = new ArrayList<>();
         for(City city : cities){
@@ -51,14 +44,12 @@ public class Service {
         return lists;
     }
     public void deleteStates(){
-        /** smaže úplně všechna data */
         weatherDataRepositoryImpl.deleteAll();
         cityRepositoryImpl.deleteAll();
         stateRepositoryImpl.deleteAll();
     }
     @Transactional
     public void deleteState(String code){
-        /** Smaže stát, jeho všechny města, a měření těchto měst */
         List<City> cities = getCitiesForState(code);
         for(City city : cities){
             deleteCity(city.getName());
@@ -67,7 +58,6 @@ public class Service {
     }
 
     public void createNewCity(String name, String stateCode){
-        /** Vytvoří nové město, případně i stát, pokud neexistuje */
         if (existsCity(name)){
             return;
         }
@@ -84,15 +74,10 @@ public class Service {
     }
 
     public List<City> getCities(){
-        /** vrátí seznam všech měst */
         return cityRepositoryImpl.findAll();
     }
     public List<City> getCitiesForState(String stateCode){
         return cityRepositoryImpl.findCitiesByStateCode(stateCode);
-    }
-    public List<WeatherData> getDataForCity(String name){
-        /** vrátí všechna měření pro dané město */
-        return getWeatherData(name);
     }
 
     public boolean existsCity(String name){
@@ -102,23 +87,13 @@ public class Service {
         return stateRepositoryImpl.existsState(code);
     }
 
-    public void deleteCities(){
-        /** smaže všechna města a tím pádem i všechna měření */
-        weatherDataRepositoryImpl.deleteAll();
-        cityRepositoryImpl.deleteAll();
-    }
     @Transactional
     public void deleteCity(String name){
-        /** smaže město a jeho všechna měření */
-        List<WeatherData> weatherData = getWeatherData(name);
-        for(WeatherData data : weatherData){
-            deleteWeatherData(data);
-        }
+        weatherDataRepositoryImpl.deleteDataForCity(name);
         cityRepositoryImpl.deleteCityByName(name);
     }
 
     public void createWeatherData(WeatherData weatherData){
-        /** uloží nové měření */
         String cityName = weatherData.getLocationName();
         long newTime = weatherData.getTime();
         WeatherData savedData = weatherDataRepositoryImpl.findFirstByLocationNameAndTimeEquals(cityName, newTime);
@@ -127,23 +102,41 @@ public class Service {
         }
         weatherDataRepositoryImpl.save(weatherData);
     }
-    public void deleteWeatherData(WeatherData weatherData){
-        /** smaže měření */
-        weatherDataRepositoryImpl.delete(weatherData);
+    public void saveMultipleDocuments(ArrayList<WeatherData> weatherData){
+        weatherDataRepositoryImpl.saveAll(weatherData);
     }
     public List<WeatherData> getWeatherData(String city){
-        /** vrátí měření pro dané město */
         return weatherDataRepositoryImpl.findByLocationName(city);
     }
     public List<WeatherData> getAllWeatherData(){
-        /** vrátí všechna měření */
         return weatherDataRepositoryImpl.findAll();
     }
-
+    public List<Float> getAvgValues(String name, int days){
+        return weatherDataRepositoryImpl.findAverageValues(name, days);
+    }
     public boolean isInputValid(String text){
         if (!text.matches("[a-žA-Ž ]+")){
             return false;
         }
         return true;
+    }
+    public void updateState(List<String> data){
+        String newValue = data.get(0);
+        String code = data.get(1);
+        stateRepositoryImpl.updateState(newValue, code);
+    }
+    public void updateCity(List<String> data){
+        String oldName = data.get(0);
+        String newName = data.get(1);
+        String code = data.get(2);
+        boolean updated = cityRepositoryImpl.updateCity(oldName, newName, code);
+        if(updated){
+            weatherDataRepositoryImpl.updateWeatherDataLocation(oldName, newName, code);
+        }
+    }
+    public void updateWeatherData(List<WeatherData> data){
+        WeatherData oldData = data.get(0);
+        WeatherData newData = data.get(1);
+        weatherDataRepositoryImpl.updateWeatherData(oldData, newData);
     }
 }

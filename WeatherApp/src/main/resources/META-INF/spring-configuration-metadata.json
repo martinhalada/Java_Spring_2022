@@ -29,5 +29,10 @@
       "name": "weather.readOnly",
       "type": "java.lang.String",
       "description": "Description for weather.readOnly."
+    },
+    {
+      "name": "weather.apiLimit",
+      "type": "java.lang.String",
+      "description": "Description for weather.apiLimit."
     }
   ] }

@@ -5,6 +5,7 @@ com\example\weatherapp\controllers\Service.class
 com\example\weatherapp\models\StateRepositoryImpl$2.class
 com\example\weatherapp\models\State.class
 com\example\weatherapp\config\WeatherApplicationConfig.class
+com\example\weatherapp\models\CityAvg.class
 com\example\weatherapp\rest\RestController.class
 com\example\weatherapp\models\CityId.class
 com\example\weatherapp\models\StateRepositoryImpl.class
@@ -12,7 +13,6 @@ com\example\weatherapp\WeatherAppApplication.class
 com\example\weatherapp\models\CityRepositoryImpl.class
 com\example\weatherapp\config\MongoConfig.class
 com\example\weatherapp\models\WeatherDataRepositoryImpl.class
-com\example\weatherapp\controllers\MainController.class
 com\example\weatherapp\models\WeatherData.class
 com\example\weatherapp\models\StateRepositoryImpl$1.class
 com\example\weatherapp\models\CityRepositoryImpl$1.class

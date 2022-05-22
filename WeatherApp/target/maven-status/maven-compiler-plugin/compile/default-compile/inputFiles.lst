@@ -1,8 +1,8 @@
 C:\Users\marth\Documents\Java\PPJ\PPJ_2022\WeatherApp\src\main\java\com\example\weatherapp\controllers\LiveWeatherService.java
 C:\Users\marth\Documents\Java\PPJ\PPJ_2022\WeatherApp\src\main\java\com\example\weatherapp\config\MongoConfig.java
 C:\Users\marth\Documents\Java\PPJ\PPJ_2022\WeatherApp\src\main\java\com\example\weatherapp\models\WeatherData.java
-C:\Users\marth\Documents\Java\PPJ\PPJ_2022\WeatherApp\src\main\java\com\example\weatherapp\controllers\MainController.java
 C:\Users\marth\Documents\Java\PPJ\PPJ_2022\WeatherApp\src\main\java\com\example\weatherapp\controllers\Service.java
+C:\Users\marth\Documents\Java\PPJ\PPJ_2022\WeatherApp\src\main\java\com\example\weatherapp\models\CityAvg.java
 C:\Users\marth\Documents\Java\PPJ\PPJ_2022\WeatherApp\src\main\java\com\example\weatherapp\models\CityRepositoryImpl.java
 C:\Users\marth\Documents\Java\PPJ\PPJ_2022\WeatherApp\src\main\java\com\example\weatherapp\models\State.java
 C:\Users\marth\Documents\Java\PPJ\PPJ_2022\WeatherApp\src\main\java\com\example\weatherapp\models\City.java

@@ -60,7 +60,6 @@ public class RestControllerTest {
 
     @Before
     public void initBefore(){
-        service.deleteStates();
         service.createNewState(state1);
         service.createNewState(state2);
         service.createNewState(state3);

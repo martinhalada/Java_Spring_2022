@@ -65,4 +65,8 @@ public class StateRepositoryImpl {
         exists = count > 0;
         return exists;
     }
+
+    public void updateState(String newValue, String code){
+        jdbcTemplate.update("UPDATE State SET name = ? WHERE code = ?", newValue, code);
+    }
 }

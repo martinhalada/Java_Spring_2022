@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Weather app</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+
+</head>
+<body>
+  <div id="forms">
+    <h1>Zobrazení meteorologických dat</h1>
+
+    <form id="forecastOnlyCityForm" action="current-weather.html">
+      <div>
+        <label for="forecastField">Zobraz data pro město</label>
+        <input id="forecastField" type="text" name="name" required placeholder="název (např. Liberec)">
+        <input type="text" name="code" required placeholder="oblast (např. ČR)">
+        <button type="submit">Hledej</button>
+      </div>
+    </form>
+    <form id="forecastStateForm" action="saved-data-state.html">
+      <div>
+        <label for="forecastStateField">Zobraz data pro stát</label>
+        <input id="forecastStateField" type="text" name="code" required placeholder="kód (např. CZ)">
+        <button type="submit">Hledej</button>
+      </div>
+    </form>
+
+    <h2>Přidávání, odebírání a úprava lokací</h2>
+
+    <form id="createNewStateForm">
+      <div>
+        <label for="newStateField">Přidej nový stát</label>
+        <input id="newStateField" type="text" name="name" required placeholder="název (např. Česká republika)">
+        <input type="text" name="code" required placeholder="zkratka (např. CZ)">
+        <button type="submit">Přidej</button>
+      </div>
+    </form>
+    <form id="deleteStateForm">
+      <div>
+        <label for="deleteStateField">Odeber stát</label>
+        <input id="deleteStateField" type="text" name="code" required placeholder="Zadej zkratku">
+        <button type="submit">Odeber stát</button>
+      </div>
+    </form>
+    <form id="updateStateForm">
+      <div>
+        <label for="updateStateField">Aktualizuj název státu</label>
+        <input id="updateStateField" type="text" name="name" required placeholder="nový název (např. česko)">
+        <input type="text" name="code" required placeholder="zkratka (např. CZ)">
+        <button type="submit">Aktualizuj</button>
+      </div>
+    </form>
+    <p></p>
+    <form id="newCityForm">
+      <div>
+        <label for="newCityField">Přidej nové město</label>
+        <input id="newCityField" type="text" name="name" required placeholder="název (např. Liberec)">
+        <input type="text" name="region" required placeholder="oblast (např. CZ)">
+        <button type="submit">Přidej</button>
+      </div>
+    </form>
+    <form id="deleteCityForm">
+      <div>
+        <label for="deleteCItyField">Odeber město</label>
+        <input id="deleteCityField" type="text" name="name" required placeholder="Zadej název">
+        <button type="submit">Odeber město</button>
+      </div>
+    </form>
+    <form id="updateCityForm">
+      <div>
+        <label for="updateCityField">Aktualizuj název města</label>
+        <input id="updateCityField" type="text" name="oldName" required placeholder="původní název">
+        <input type="text" name="name" required placeholder="nový název">
+        <input type="text" name="region" required placeholder="oblast (např. CZ)">
+        <button type="submit">Aktualizuj</button>
+      </div>
+    </form>
+    <p></p>
+    <!-- <a href="/">Aktualizace následujících tabulek</a> -->
+  </div>
+
+  <h2 id="nadpisStaty">Seznam uložených států</h2>
+  <h2 id="nadpisMesta">Seznam uložených měst</h2>
+
+  <script type="text/javascript" src="scripts/mainScript.js"></script>
+</body>
+</html>
