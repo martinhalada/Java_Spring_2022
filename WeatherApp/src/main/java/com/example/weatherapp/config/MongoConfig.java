@@ -30,7 +30,7 @@ public class MongoConfig{
     }
 
     @Bean
-    public MongoTemplate mongoTemplate() throws Exception{
+    public MongoTemplate mongoTemplate() {
         MongoTemplate template = new MongoTemplate(mongoClient(),databaseName);
         template.indexOps("forecast").dropIndex("date_1");
         template

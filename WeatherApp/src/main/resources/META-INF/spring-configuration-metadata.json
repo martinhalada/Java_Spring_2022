@@ -3,36 +3,26 @@
     {
       "name": "weather.apikey",
       "type": "java.lang.String",
-      "description": "Description for weather.apikey."
+      "description": "Api key for openweathermap."
     },
     {
       "name": "weather.updateInterval",
       "type": "java.lang.String",
-      "description": "Description for weather.updateInterval."
+      "description": "Interval between updates in milliseconds."
     },
     {
       "name": "weather.expire",
       "type": "java.lang.String",
-      "description": "Description for weather.expire."
-    },
-    {
-      "name": "weather.csvFileName",
-      "type": "java.lang.String",
-      "description": "Description for weather.csvFileName."
-    },
-    {
-      "name": "weather.csvToUpload",
-      "type": "java.lang.String",
-      "description": "Description for weather.csvToUpload."
+      "description": "Expiration time in seconds."
     },
     {
       "name": "weather.readOnly",
       "type": "java.lang.String",
-      "description": "Description for weather.readOnly."
+      "description": "Set read only mode."
     },
     {
       "name": "weather.apiLimit",
       "type": "java.lang.String",
-      "description": "Description for weather.apiLimit."
+      "description": "Maximum API calls per minute."
     }
   ] }

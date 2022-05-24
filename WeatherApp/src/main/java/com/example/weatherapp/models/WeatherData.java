@@ -59,14 +59,6 @@ public class WeatherData {
         this.date = date;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public Date getDate() {
         return date;
     }
@@ -83,72 +75,36 @@ public class WeatherData {
         return country;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
     public long getTime() {
         return time;
-    }
-
-    public void setTime(long time) {
-        this.time = time;
     }
 
     public float getTemp() {
         return temp;
     }
 
-    public void setTemp(float temp) {
-        this.temp = temp;
-    }
-
     public float getPressure() {
         return pressure;
-    }
-
-    public void setPressure(float pressure) {
-        this.pressure = pressure;
     }
 
     public float getHumidity() {
         return humidity;
     }
 
-    public void setHumidity(float humidity) {
-        this.humidity = humidity;
-    }
-
     public float getVisibility() {
         return visibility;
-    }
-
-    public void setVisibility(float visibility) {
-        this.visibility = visibility;
     }
 
     public float getWindSpeed() {
         return windSpeed;
     }
 
-    public void setWindSpeed(float windSpeed) {
-        this.windSpeed = windSpeed;
-    }
-
     public float getWindDegree() {
         return windDegree;
     }
 
-    public void setWindDegree(float windDegree) {
-        this.windDegree = windDegree;
-    }
-
     public float getClouds() {
         return clouds;
-    }
-
-    public void setClouds(float clouds) {
-        this.clouds = clouds;
     }
 
     @Override

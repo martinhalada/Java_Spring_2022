@@ -20,50 +20,45 @@ public class StateRepositoryImpl {
     }
 
     public void save(State state){
-        jdbcTemplate.update("INSERT INTO State VALUES (?, ?)", state.getName(), state.getCode());
+        jdbcTemplate.update("INSERT INTO State (name, code) VALUES (?, ?)", state.getName().toLowerCase(), state.getCode().toLowerCase());
     }
+
     public List<State> findAll(){
-        return jdbcTemplate.query("SELECT name, code FROM State", new RowMapper<State>() {
-            @Override
-            public State mapRow(ResultSet rs, int rowNum) throws SQLException {
-                State state = new State();
-                state.setName(rs.getString("name"));
-                state.setCode(rs.getString("code"));
-                return state;
-            }
+        return jdbcTemplate.query("SELECT name, code FROM State", (rs, rowNum) -> {
+            State state = new State();
+            state.setName(rs.getString("name"));
+            state.setCode(rs.getString("code"));
+            return state;
         });
     }
-    public void deleteAll(){
-        jdbcTemplate.update("DELETE FROM State");
-    }
+
     public State findStateByCode(String code){
         try {
-            State state = jdbcTemplate.queryForObject("SELECT name, code FROM State WHERE code = ?",
+            return jdbcTemplate.queryForObject("SELECT name, code FROM State WHERE code = ?",
                     new Object[]{code},
-                    new RowMapper<State>() {
-                        @Override
-                        public State mapRow(ResultSet rs, int rowNum) throws SQLException {
-                            State state = new State();
-                            state.setName(rs.getString("name"));
-                            state.setCode(rs.getString("code"));
-                            return state;
-                        }
+                    (rs, rowNum) -> {
+                        State state = new State();
+                        state.setName(rs.getString("name"));
+                        state.setCode(rs.getString("code"));
+                        return state;
                     });
-            return state;
         }catch (Exception e){
             return null;
         }
     }
+
     public void deleteStateByCode(String code){
         jdbcTemplate.update("DELETE FROM State WHERE code = ?", code);
     }
 
+    public void deleteAll(){
+        jdbcTemplate.update("DELETE FROM State");
+    }
+
     public boolean existsState(String code){
         String sql = "SELECT count(*) FROM State WHERE code = ?";
-        boolean exists = false;
         int count = jdbcTemplate.queryForObject(sql, new Object[] { code }, Integer.class);
-        exists = count > 0;
-        return exists;
+        return count > 0;
     }
 
     public void updateState(String newValue, String code){

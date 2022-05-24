@@ -19,7 +19,7 @@ forecastOnlyCityForm.addEventListener("submit",()=>{
     localStorage.setItem("code",code);
 });
 
-createNewStateForm.addEventListener("submit", (event) => {
+createNewStateForm.addEventListener("submit", () => {
     let stateName = createNewStateForm.elements["name"].value;
     let stateCode = createNewStateForm.elements["code"].value;
     let xhr = new XMLHttpRequest();
@@ -32,7 +32,7 @@ createNewStateForm.addEventListener("submit", (event) => {
     location.reload();
 });
 
-deleteStateForm.addEventListener("submit", (event) => {
+deleteStateForm.addEventListener("submit", () => {
     let stateCode = deleteStateForm.elements["code"].value;
     let xhr = new XMLHttpRequest();
     xhr.open("DELETE", "/api/states/"+stateCode, false);
@@ -40,7 +40,7 @@ deleteStateForm.addEventListener("submit", (event) => {
     location.reload();
 });
 
-updateStateForm.addEventListener("submit", (event) => {
+updateStateForm.addEventListener("submit", () => {
     let newName = updateStateForm.elements["name"].value;
     let code = updateStateForm.elements["code"].value;
     let xhr = new XMLHttpRequest();
@@ -53,7 +53,7 @@ updateStateForm.addEventListener("submit", (event) => {
     location.reload();
 });
 
-updateCityForm.addEventListener("submit", (event) => {
+updateCityForm.addEventListener("submit", () => {
     let oldName = updateCityForm.elements["oldName"].value;
     let newName = updateCityForm.elements["name"].value;
     let code = updateCityForm.elements["region"].value;
@@ -68,7 +68,7 @@ updateCityForm.addEventListener("submit", (event) => {
     location.reload();
 });
 
-createNewCityForm.addEventListener("submit", (event) => {
+createNewCityForm.addEventListener("submit", () => {
     let cityName = createNewCityForm.elements["name"].value;
     let cityCode = createNewCityForm.elements["region"].value;
     let xhr = new XMLHttpRequest();
@@ -85,7 +85,7 @@ createNewCityForm.addEventListener("submit", (event) => {
     location.reload();
 });
 
-deleteCityForm.addEventListener("submit", (event) => {
+deleteCityForm.addEventListener("submit", () => {
     let cityName = deleteCityForm.elements["name"].value;
     console.log(cityName);
     let xhr = new XMLHttpRequest();

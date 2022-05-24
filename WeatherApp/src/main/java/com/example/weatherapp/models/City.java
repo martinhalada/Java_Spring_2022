@@ -8,12 +8,14 @@ import javax.persistence.*;
 public class City{
 
     @Id
+    @Column(name="name")
     private String name;
     @Id
+    @Column(name="region")
     private String region;
 
     @ManyToOne
-    @JoinColumn(name="state_FK")
+    @JoinColumn(name="state")
     private State state;
 
     public City() {

@@ -75,10 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let xhttp2 = new XMLHttpRequest();
     xhttp2.onload = function (){
         if(xhttp2.status===200){
-            let udaje = ["teplota", "tlak", "vlhkost", "rychlost větru"];
-            let avg1day = document.createElement("p");
-            let avg7day = document.createElement("p");
-            let avg14days = document.createElement("p");
             data = JSON.parse(xhttp2.responseText);
 
             let table = document.createElement("table");
