@@ -243,22 +243,35 @@ public class RestController {
             LOGGER.warn("Invalid city name");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        List<Float> avgValuesDay = service.getAvgValues(name.toLowerCase(), 1);
-        List<Float> avgValuesWeek = service.getAvgValues(name.toLowerCase(), 7);
-        List<Float> avgValues2Weeks = service.getAvgValues(name.toLowerCase(), 14);
-        List<List<Float>> avg = new ArrayList<>(
-                Arrays.asList(avgValuesDay, avgValuesWeek, avgValues2Weeks));
-        return new ResponseEntity<>(avg, HttpStatus.OK);
+        try {
+            List<Float> avgValuesDay = service.getAvgValues(name.toLowerCase(), 1);
+            List<Float> avgValuesWeek = service.getAvgValues(name.toLowerCase(), 7);
+            List<Float> avgValues2Weeks = service.getAvgValues(name.toLowerCase(), 14);
+            List<List<Float>> avg = new ArrayList<>(
+                    Arrays.asList(avgValuesDay, avgValuesWeek, avgValues2Weeks));
+            return new ResponseEntity<>(avg, HttpStatus.OK);
+        }catch (Exception e){
+            LOGGER.warn("Error while getting avg values, check if city exist and if has some data: "+e.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @RequestMapping(value="/api/updateState", method=RequestMethod.POST)
     public ResponseEntity<String> updateState(@RequestBody List<String> data){
+        if(readOnly){
+            LOGGER.warn("Cannot update state name, because of read only mode");
+            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+        }
         service.updateState(data);
         return new ResponseEntity<>("State updated", HttpStatus.OK);
     }
 
     @RequestMapping(value="/api/updateCity", method=RequestMethod.POST)
     public ResponseEntity<String> updateCity(@RequestBody List<String> data){
+        if(readOnly){
+            LOGGER.warn("Cannot update city, because of read only mode");
+            return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+        }
         try{
             String newName = data.get(1).toLowerCase();
             String code = data.get(2).toLowerCase();

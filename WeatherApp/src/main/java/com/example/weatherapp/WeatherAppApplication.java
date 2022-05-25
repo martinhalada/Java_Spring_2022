@@ -34,12 +34,10 @@ public class WeatherAppApplication implements CommandLineRunner {
         LOGGER.info("Application started");
 
         State state1 = new State("česká republika", "cz");
-
         City city1 = new City("liberec", "cz", state1);
         City city2 = new City("ústí", "cz", state1);
 
         service.createNewState(state1);
-
         service.createNewCity(city1.getName(), city1.getRegion());
         service.createNewCity(city2.getName(), city2.getRegion());
     }
